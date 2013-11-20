@@ -76,4 +76,7 @@ public class Concierto {
 			canciones.add(cancion);
 		}
 	}
+	public void ensayo(){
+		
+	}
 }

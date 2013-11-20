@@ -18,7 +18,7 @@ public class Servidor implements Runnable{
 
 	public Servidor() {
 		puerto = 4900;
-		listConexion = new ArrayList<>();
+		listConexion = new ArrayList<Conexion>();
 		Thread hilo = new Thread(this);
 		hilo.start();
 		

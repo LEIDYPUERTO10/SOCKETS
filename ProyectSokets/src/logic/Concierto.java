@@ -70,9 +70,13 @@ public class Concierto {
 		this.nombre = nombre;
 	}
 	
+	public Concierto() {
+		// TODO Auto-generated constructor stub
+		canciones = new ArrayList<Cancion>();
+	}
+	
 	private void agregarCancion(Cancion cancion){
 		if(cancion != null){
-			
 			canciones.add(cancion);
 		}
 	}

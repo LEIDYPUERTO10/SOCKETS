@@ -142,10 +142,23 @@ public class Servidor implements Runnable{
 	 */
 	public Servidor(int puerto) {
 		this.puerto = puerto;
-		listConexion = new ArrayList<Conexion>();
-		listaConciertos = new ArrayList<Concierto>();
-		Thread hilo = new Thread(this);
-		hilo.start();
+//		try {
+//			serverSocket  = new ServerSocket(puerto);
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		File archivoCanciones = new File("./src/persistence");
+//		listaCanciones = new File[archivoCanciones.list().length];
+////		listaCanciones.add(archivoCanciones.list())
+//		listaCanciones = archivoCanciones.listFiles();
+//		listConexion = new ArrayList<Conexion>();
+//		listaConciertos = new ArrayList<Concierto>();
+//		Thread hilo = new Thread(this);
+//		hilo.start();
+//		
+//		listConexion = new ArrayList<Conexion>();
+//		listaConciertos = new ArrayList<Concierto>();
 		try {
 			iniciarServidor(puerto);
 		} catch (IOException e) {
@@ -153,6 +166,8 @@ public class Servidor implements Runnable{
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "ERROR AL INCIAR SERVIDOR");
 		}
+		Thread hilo = new Thread(this);
+		hilo.start();
 	}
 	
 	/**
@@ -162,10 +177,7 @@ public class Servidor implements Runnable{
 
 	public Servidor() {
 		// TODO Auto-generated constructor stub
-		listConexion = new ArrayList<Conexion>();
-		listaConciertos = new ArrayList<Concierto>();
-		Thread hilo = new Thread(this);
-		hilo.start();
+		puerto = 4900;
 		try {
 			iniciarServidor(puerto);
 		} catch (IOException e) {
@@ -173,6 +185,8 @@ public class Servidor implements Runnable{
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "ERROR AL INCIAR SERVIDOR");
 		}
+		Thread hilo = new Thread(this);
+		hilo.start();
 	}
 
 	//@Override

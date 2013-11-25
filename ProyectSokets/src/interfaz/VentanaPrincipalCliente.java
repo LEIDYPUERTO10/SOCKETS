@@ -5,12 +5,17 @@
 
 package interfaz;
 
+import java.awt.Color;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
+import logic.Cancion;
 import logic.Cliente;
 
 /**
@@ -23,6 +28,8 @@ public class VentanaPrincipalCliente extends JFrame{
 	
 	private PnlIzquierdoCliente pnlIzquierdo;
 	private Cliente cliente;
+	public JTextArea txtLetraCancion;
+	private Cancion cancion;
 
 	/**
 	 * @return the cliente
@@ -59,7 +66,7 @@ public class VentanaPrincipalCliente extends JFrame{
 		add(pnlIzquierdo);
 		
 		try {		
-			cliente = new Cliente();
+			cliente = new Cliente(4900);
 			this.setVisible(true);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -67,7 +74,19 @@ public class VentanaPrincipalCliente extends JFrame{
 			this.setVisible(false);
 		}
 		
+		JPanel pnlDerecho = new JPanel();
+		pnlDerecho.setBackground(Color.WHITE);
+		pnlDerecho.setLayout(null);
+		pnlDerecho.setSize(600, 320);
+		pnlDerecho.setLocation(205, 0);
+		add(pnlDerecho);
 		
+		txtLetraCancion = new JTextArea();
+		txtLetraCancion.setSize(570,300);
+		txtLetraCancion.setLocation(10, 10);
+		pnlDerecho.add(txtLetraCancion);
+		
+		cancion = new Cancion(this,"mientes tan bien.txt");
 	}
 	
 	public static void main(String[] args) throws UnknownHostException {

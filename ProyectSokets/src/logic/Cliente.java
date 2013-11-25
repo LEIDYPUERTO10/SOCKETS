@@ -89,7 +89,7 @@ public class Cliente implements Runnable {
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 		try {
-			socket = new Socket(direccionIP, puertoCliente);
+			socket = new Socket("10.0.32.180", puertoCliente);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("ERROR CREANDO CLIENTE");

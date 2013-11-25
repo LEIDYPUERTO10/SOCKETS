@@ -61,11 +61,6 @@ public class VentanaPrincipalServidor extends JFrame {
 		listaCanciones.setSize(540, 240);
 		listaCanciones.setLocation(10, 50);
 		modeloListaCanciones = new DefaultListModel();
-		
-		for(int i = 0; i < servidorLogica.getListaCanciones().length; i++ ){
-			System.out.println(servidorLogica.getListaCanciones()[i].getName());
-			modeloListaCanciones.addElement(servidorLogica.getListaCanciones()[i].getName());
-		}		
 		listaCanciones.setModel(modeloListaCanciones);
 		pnlCentral.add(listaCanciones);
 	}

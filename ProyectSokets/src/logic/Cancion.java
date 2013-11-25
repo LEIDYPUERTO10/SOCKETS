@@ -1,7 +1,8 @@
 package logic;
 
-import java.util.ArrayList;
+import interfaz.VentanaPrincipalCliente;
 
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,12 +18,13 @@ import javax.swing.JOptionPane;
  * el nombre, el autor y la letra 
  */
 
-public class Cancion {
+public class Cancion implements Runnable{
 	
 	private String nombre;
 	private int año;
 	private String autor;
 	private ArrayList<String> letra;
+	private VentanaPrincipalCliente ventanaCliente;
 	
 	/**
 	 * @return the nombre
@@ -95,16 +97,15 @@ public class Cancion {
 	 * @param letra
 	 * Este es el contructor de la clase Cancion.java
 	 */
-	public Cancion(String nombre, int año, String autor, ArrayList<String> letra) {
+	public Cancion(String nombre, int año, String autor,
+			ArrayList<String> letra) {
 		super();
 		this.nombre = nombre;
 		this.año = año;
 		this.autor = autor;
 		this.letra = letra;
 	}
-	
-	
-	
+		
 	/**
 	 * @param nombre
 	 * @param año
@@ -118,6 +119,16 @@ public class Cancion {
 		this.año = año;
 		this.autor = autor;
 		letra = new ArrayList<String>();
+	}
+
+	
+	public Cancion(VentanaPrincipalCliente ventanaCliente, String nombreCancion) {
+		super();
+		letra = new ArrayList<String>();
+		this.ventanaCliente = ventanaCliente;
+		leerCancion(nombreCancion);
+		Thread hilo = new Thread(this);
+		hilo.start();
 	}
 
 	public ArrayList<String> leerCancion(String nombreCancion){
@@ -134,8 +145,26 @@ public class Cancion {
 				JOptionPane.showMessageDialog(null, "LA CANCION NO SE ENCUENTRA");
 			}
 			for (int i = 0; i < letra.size(); i++) {
-				System.out.println(letra.get(1));
+				System.out.println(letra.get(i));
 			}
 			return letra;
 		}
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		int tamanio = 0;
+		while(tamanio < letra.size()){
+			ventanaCliente.txtLetraCancion.setText(ventanaCliente.txtLetraCancion.getText()+"\n"+letra.get(tamanio));
+			tamanio++;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }

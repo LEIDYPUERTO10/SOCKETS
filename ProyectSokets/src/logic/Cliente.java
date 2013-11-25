@@ -14,7 +14,11 @@ import javax.print.DocFlavor.INPUT_STREAM;
 import javax.swing.JOptionPane;
 
 
-
+/**
+ * @author LEIDY CAROLINA PUERTO GALINDO
+ * Esta clase permite administrar el cliente del programa, implementa 
+ * Runnable ya que se transmitira hilos
+ */
 public class Cliente implements Runnable {
 
 
@@ -26,11 +30,30 @@ public class Cliente implements Runnable {
 	private boolean ejecutar;
 	private int opcion;
 
-	public Cliente()  {
-		puertoCliente = 4900;
+		/**
+	 * @return the puertoCliente
+	 */
+	
+	public int getPuertoCliente() {
+		return puertoCliente;
+	}
+
+	/**
+	 * @param puertoCliente the puertoCliente to set
+	 */
+	
+	public void setPuertoCliente(int puertoCliente) {
+		this.puertoCliente = puertoCliente;
+	}
+
+	/**
+	 * 
+	 * Este es el contructor de la clase Cliente.java
+	 */
+	public Cliente(int puerto)  {
+		puertoCliente = puerto;
 		try {
-			socket = new Socket("10.0.32.56", puertoCliente);
-			
+			socket = new Socket(direccionIP, puertoCliente);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("ERROR CREANDO CLIENTE");
@@ -58,6 +81,42 @@ public class Cliente implements Runnable {
 		
 	}
 
+	/**
+	 * 
+	 * Este es el contructor de la clase Cliente.java
+	 */
+
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+		try {
+			socket = new Socket(direccionIP, puertoCliente);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("ERROR CREANDO CLIENTE");
+		}
+
+		try {
+			dataInputStream = new DataInputStream(socket.getInputStream());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("ERROR CREANDO CANAL DE ENTRADA");
+		}
+
+		try {
+			dataOutputStream = new DataOutputStream(socket.getOutputStream());
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			System.out.println("ERROR CREANDO CANAL DE SALIDA");
+		}
+		
+		Thread hilo = new Thread(this);
+		hilo.start();
+		
+
+	}
 
 
 	@Override
@@ -75,7 +134,8 @@ public class Cliente implements Runnable {
 			case 1:
 				try {
 					
-					JOptionPane.showMessageDialog(null, dataInputStream.readUTF());
+//					JOptionPane.showMessageDialog(null, dataInputStream.readUTF());
+					System.out.println(dataInputStream.readUTF());
 					
 				} catch (HeadlessException e) {
 					e.printStackTrace();
@@ -95,16 +155,23 @@ public class Cliente implements Runnable {
 				
 				break;
 			}
-			System.out.println("Esperando Conexiones...");
-
 		}	
 	}		
 
-	public void cerrarCliente (){
+	/**
+	 * 
+	 * Este metodo permite detener el hilo que cree el cliente
+	 */
+	public void detenerHiloCliente (){
 		ejecutar = false;
 	}
 
 
+	/**
+	 * 
+	 * Este metodo permite cerrar la conexion; primero cierra la entrada
+	 * de datos, luego la salida y por ultimo cierra el socket 
+	 */
 	public void cerrarConexion(){
 		try {
 			dataInputStream.close();
@@ -129,6 +196,26 @@ public class Cliente implements Runnable {
 			e.printStackTrace();
 			System.out.println("ERROR CERRANDO SOCKET");
 		}
+	}
+
+
+
+	/**
+	 * @return the direccionIP
+	 */
+	
+	public String getDireccionIP() {
+		return direccionIP;
+	}
+
+
+
+	/**
+	 * @param direccionIP the direccionIP to set
+	 */
+	
+	public void setDireccionIP(String direccionIP) {
+		this.direccionIP = direccionIP;
 	}
 
 }

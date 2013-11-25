@@ -10,8 +10,11 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-
-
+/**
+ * @author LEIDY CAROLINA PUERTO GALINDO
+ * Esta clase permite administrar las conexiones que se presente 
+ * entre el cliente y el servidor
+ */
 public class Conexion implements Runnable{
 
 	private Socket socketConex;
@@ -21,11 +24,13 @@ public class Conexion implements Runnable{
 	private int opcion;
 
 
-
+	/**
+	 * @param socketNew
+	 * Este es el contructor de la clase Conexion.java
+	 */
 	public Conexion(Socket socketNew) {
 
 		this.socketConex = socketNew;
-
 		try {
 			dataInputStream = new DataInputStream(socketConex.getInputStream());
 			
@@ -85,6 +90,11 @@ public class Conexion implements Runnable{
 		}	
 	}
 
+	/**
+	 * 
+	 * Este metodo permite establecer la conexion entre cliente y 
+	 * servidor 
+	 */
 	public void iniciarConexion (){
 		try {
 			dataOutputStream.writeInt(1);
@@ -94,16 +104,18 @@ public class Conexion implements Runnable{
 			
 		}
 		try {
-			
-			dataOutputStream.writeUTF("HOLA");
-			
-		} catch (IOException e) {
-			
-			
+//			Servidor servidor = new Servidor();
+//			dataOutputStream.writeUTF(servidor.getDirecionIP());
+			dataOutputStream.writeUTF("hla");
+		} catch (IOException e) {		
 			e.printStackTrace();
 		}	
 	}
 
+	/**
+	 * 
+	 * Este metodo permite cerrar la conexion 
+	 */
 	public void cerrarConexion(){
 		try {
 			dataInputStream.close();

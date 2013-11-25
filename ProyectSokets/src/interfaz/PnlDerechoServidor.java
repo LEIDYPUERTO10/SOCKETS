@@ -10,9 +10,39 @@ import javax.swing.JPanel;
 
 public class PnlDerechoServidor extends JPanel implements ActionListener {
 	
-	private JButton btnIncial;
+	JButton btnIncial;
 	private JLabel lblConcierto;
+	private int posicionX = 30;
+	private int posicionY = 50;
+		
+	/**
+	 * @return the posocionX
+	 */
 	
+	public int getPosicionX() {
+		return posicionX;
+	}
+	/**
+	 * @param posocionX the posocionX to set
+	 */
+	
+	public void setPosicionX(int posocionX) {
+		this.posicionX = posocionX;
+	}
+	/**
+	 * @return the posicionY
+	 */
+	
+	public int getPosicionY() {
+		return posicionY;
+	}
+	/**
+	 * @param posicionY the posicionY to set
+	 */
+	
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
 	public PnlDerechoServidor() {
 		// TODO Auto-generated constructor stub
 		setBackground(new Color(072, 061,139));
@@ -27,7 +57,8 @@ public class PnlDerechoServidor extends JPanel implements ActionListener {
 		
 		btnIncial = new JButton();
 		btnIncial.setSize(150, 20);
-		btnIncial.setLocation(30, 50);
+		btnIncial.setLocation(posicionX, posicionY);
+		btnIncial.setVisible(false);
 		add(btnIncial);
 	}
 	@Override

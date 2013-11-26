@@ -3,6 +3,7 @@ package logic;
 import interfaz.VentanaPrincipalCliente;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,7 +26,26 @@ public class Cancion implements Runnable{
 	private String autor;
 	private ArrayList<String> letra;
 	private VentanaPrincipalCliente ventanaCliente;
+	private int duracionMinutos;
+	private int duracionSegundos;
 	
+	
+	public int getDuracionMinutos() {
+		return duracionMinutos;
+	}
+
+	public void setDuracionMinutos(int duracionMinutos) {
+		this.duracionMinutos = duracionMinutos;
+	}
+
+	public int getDuracionSegundos() {
+		return duracionSegundos;
+	}
+
+	public void setDuracionSegundos(int duracionSegundos) {
+		this.duracionSegundos = duracionSegundos;
+	}
+
 	/**
 	 * @return the nombre
 	 */
@@ -159,12 +179,18 @@ public class Cancion implements Runnable{
 			ventanaCliente.txtLetraCancion.setText(ventanaCliente.txtLetraCancion.getText()+"\n"+letra.get(tamanio));
 			tamanio++;
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(calcularDuracion(duracionMinutos, duracionSegundos));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public int calcularDuracion(int minutos, int segundos){
+		minutos = minutos*60000;
+		segundos = segundos*1000;
+		return (minutos+segundos)/letra.size();
 	}
 	
 }

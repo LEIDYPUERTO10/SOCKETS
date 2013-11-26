@@ -50,8 +50,9 @@ public class Cliente implements Runnable {
 	 * 
 	 * Este es el contructor de la clase Cliente.java
 	 */
-	public Cliente(int puerto)  {
+	public Cliente(int puerto, String ip)  {
 		puertoCliente = puerto;
+		direccionIP = ip;
 		try {
 			socket = new Socket(direccionIP, puertoCliente);
 		} catch (IOException e) {
@@ -117,7 +118,6 @@ public class Cliente implements Runnable {
 		
 
 	}
-
 
 	@Override
 	public void run() {

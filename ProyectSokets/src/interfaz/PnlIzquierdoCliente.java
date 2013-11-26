@@ -197,7 +197,7 @@ public class PnlIzquierdoCliente extends JPanel implements ActionListener{
 //				System.out.println("sdadad"+txtIP.getText());
 //			}
 			try {
-				ventanaCliente.getCliente().setDireccionIP(txtIP.getText());
+				ventanaCliente.ventanaPuerto.getClienteLogica().setDireccionIP(txtIP.getText());
 				} catch (Exception e2) {
 					// TODO: handle exception
 					System.out.println("error");

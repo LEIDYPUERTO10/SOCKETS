@@ -104,9 +104,10 @@ public class Conexion implements Runnable{
 			
 		}
 		try {
-//			Servidor servidor = new Servidor();
+			Servidor servidor = new Servidor();
 //			dataOutputStream.writeUTF(servidor.getDirecionIP());
 			dataOutputStream.writeUTF("hla");
+//			dataOutputStream.writeUTF();
 		} catch (IOException e) {		
 			e.printStackTrace();
 		}	
